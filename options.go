@@ -54,6 +54,10 @@ func (o *Options) file(extension string) (string, error) {
 			return fn, nil
 		}
 	}
+	fn := fmt.Sprintf("/etc/%s.%s", o.prefix, extension)
+	if _, err := os.Stat(fn); err == nil {
+		return fn, nil
+	}
 	return "", errNotFound
 }
 
@@ -64,10 +68,7 @@ func (o *Options) flag(name string) string {
 func (o *Options) yml() (*os.File, error) {
 	fn, err := o.file("yml")
 	if err != nil {
-		fn, err = o.file("yaml")
-		if err != nil {
-			return nil, err
-		}
+		return nil, err
 	}
 	if Debug {
 		log.Println("Found YAML file:", fn)

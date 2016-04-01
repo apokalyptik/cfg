@@ -1,9 +1,9 @@
 /*
-Package cfgflag is an easy way to provide configuration file and environmenta
+Package cfgflag is an easy way to provide configuration file and environmental
 defaults to the flag package from the standard library.
 
 The reason for the creation of this package was to make a simple, easy, and
-standard library based way to configure their applications. There exist many
+standard library based way to configure applications and libs. There exist many
 very very good configuration libraries out there for Go, but the ones that
 I have found are very heavy and usually geared towards a very specific kind
 of use case.  They rely a lot on reflection, and configuring entire structs
@@ -46,9 +46,10 @@ JSON config file support for
 You'll notice that there is no prefix inside the file since the filename counts as the
 variables namespace. JSON is read from exactly one the following files in order from
 lowest priority to highest:
-	~/.test.json
-	~/test.json
-	./.test.json
+	/etc/test.json unless we find
+	~/.test.json unless we find
+	~/test.json unless we find
+	./.test.json unless we find
 	./test.json
 At this point *myvar would be 97 if no further configuration is found or specified.
 
@@ -58,14 +59,11 @@ YAML config file support for
 You'll notice that there is no prefix inside the file since the filename counts as the
 variables namespace. YAML is read from exactly one the following files in order from
 lowest priority to highest:
-	~/.test.yaml
-	~/test.yaml
-	./.test.yaml
-	./test.yaml
-	~/.test.yml
-	~/test.yml
-	./.test.yml
-	./test.ymli
+	/etc/test.yml unless we find
+	~/.test.yml unless we find
+	~/test.yml unless we find
+	./.test.yml unless we find
+	./test.yml
 At this point *myvar would be 96 if no further configuration is found or specified.
 
 Command line speficied flags take precedence over YAML, JSON, ENV, and flag defaults
