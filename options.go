@@ -54,7 +54,7 @@ func (o *Options) file(extension string) (string, error) {
 			return fn, nil
 		}
 	}
-	fn := fmt.Sprintf("/etc/%s.%s", o.prefix, extension)
+	fn = fmt.Sprintf("/etc/%s.%s", o.prefix, extension)
 	if _, err := os.Stat(fn); err == nil {
 		return fn, nil
 	}

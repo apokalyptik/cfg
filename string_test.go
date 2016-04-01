@@ -10,7 +10,7 @@ import (
 func TestString(t *testing.T) {
 	os.Setenv("STRING_S1", "1 is 1")
 	ioutil.WriteFile(".string.json", []byte(`{"s2": "2 is 2"}`), 0644)
-	ioutil.WriteFile(".string.yaml", []byte("---\ns3: 3 is 3\ns4: \"4 is 4\""), 0644)
+	ioutil.WriteFile(".string.yml", []byte("---\ns3: 3 is 3\ns4: \"4 is 4\""), 0644)
 	c := New("string")
 	vs := []*string{
 		c.String("s1", "1 is 1", ""),

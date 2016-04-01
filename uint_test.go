@@ -9,7 +9,7 @@ import (
 func TestUint(t *testing.T) {
 	os.Setenv("UINT_UI1", "1")
 	ioutil.WriteFile(".uint.json", []byte(`{"ui2": 2, "ui3": "3"}`), 0644)
-	ioutil.WriteFile(".uint.yaml", []byte("---\nui4: 4\nui5: \"5\""), 0644)
+	ioutil.WriteFile(".uint.yml", []byte("---\nui4: 4\nui5: \"5\""), 0644)
 	c := New("uint")
 	vs := []*uint{
 		c.Uint("ui1", 1, ""),
@@ -30,7 +30,7 @@ func TestUint(t *testing.T) {
 func TestUint64(t *testing.T) {
 	os.Setenv("UINT64_UI61", "1")
 	ioutil.WriteFile(".uint64.json", []byte(`{"ui62": 2, "ui63": "3"}`), 0644)
-	ioutil.WriteFile(".uint64.yaml", []byte("---\nui64: 4\nui65: \"5\""), 0644)
+	ioutil.WriteFile(".uint64.yml", []byte("---\nui64: 4\nui65: \"5\""), 0644)
 	c := New("uint64")
 	vs := []*uint64{
 		c.Uint64("ui61", 6, ""),

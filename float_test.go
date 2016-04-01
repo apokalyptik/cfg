@@ -10,7 +10,7 @@ import (
 func TestFloat(t *testing.T) {
 	os.Setenv("FLOAT_F1", "0.1")
 	ioutil.WriteFile(".float.json", []byte(`{"f2": 0.2, "f3": "0.3", "f7": 7}`), 0644)
-	ioutil.WriteFile(".float.yaml", []byte("---\nf4: 0.4\nf5: \"0.5\"\nf8: 8"), 0644)
+	ioutil.WriteFile(".float.yml", []byte("---\nf4: 0.4\nf5: \"0.5\"\nf8: 8"), 0644)
 	c := New("float")
 	vs := []*float64{
 		c.Float64("f1", 0.6, ""),
