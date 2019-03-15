@@ -3,6 +3,7 @@ package cfg
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/user"
 	"testing"
 )
@@ -41,5 +42,33 @@ func TestOptionsBadFiles(t *testing.T) {
 	Parse()
 	if *s != "default" {
 		t.Error("Expected default from no files...")
+	}
+}
+
+func TestEnvFile(t *testing.T) {
+	filePath := "/tmp/mysecret.yml"
+	ioutil.WriteFile(filePath, []byte("value"), 0644)
+	defer os.Remove(filePath)
+	os.Setenv("MY_VAR_FILE", filePath)
+	defer os.Unsetenv("MY_VAR_FILE")
+
+	c := New("my")
+	s := c.String("var", "default","")
+
+	if *s != "value" {
+		t.Error("Expected value from env var file path got default")
+	}
+
+}
+
+func TestEnv(t *testing.T) {
+	os.Setenv("MY_VARS", "new_value")
+	defer os.Unsetenv("MY_VARS")
+
+	d := New("my")
+	x := d.String("vars", "default","")
+
+	if *x != "new_value" {
+		t.Errorf("Expected value from env var got default")
 	}
 }
