@@ -2,12 +2,11 @@ package cfg
 
 import (
 	"flag"
-	"os"
 	"strings"
 )
 
 func (o *Options) defaultBool(name string, value bool) bool {
-	if v := strings.ToLower(os.Getenv(o.env(name))); v != "" {
+	if v := strings.ToLower(o.getEnv(name)); v != "" {
 		switch v[:1] {
 		case "1":
 			value = true

@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"os"
 	"strconv"
 )
 
 func (o *Options) defaultFloat(name string, value float64) float64 {
-	if v := os.Getenv(o.env(name)); v != "" {
+	if v := o.getEnv(name); v != "" {
 		if f, err := strconv.ParseFloat(v, 64); err == nil {
 			value = f
 		}

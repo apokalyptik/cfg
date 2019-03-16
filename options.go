@@ -23,7 +23,7 @@ type Options struct {
 }
 
 func (o *Options) getEnv(name string) string {
-	// default to _FILE if env is empty/unset (docker secret)
+	// default to %s_FILE if env is empty/unset (docker secret)
 	if os.Getenv(o.env(name)) == "" {
 		envFile := os.Getenv(o.envFile(name))
 		val, _ := ioutil.ReadFile(envFile)
