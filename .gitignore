@@ -26,3 +26,4 @@ _testmain.go
 *.yml
 *.yaml
 *.json
+.idea

@@ -2,12 +2,11 @@ package cfg
 
 import (
 	"flag"
-	"os"
 	"time"
 )
 
 func (o *Options) defaultDuration(name string, value time.Duration) time.Duration {
-	if v := os.Getenv(o.env(name)); v != "" {
+	if v := o.getEnv(name); v != "" {
 		if d, err := time.ParseDuration(v); err == nil {
 			value = d
 		}

@@ -41,6 +41,12 @@ Environment variable based defaults via
 You'll notice that it's {prefix}_{flag} all uppercased. At this point *myvar would be 98
 if no further configuration is found or specified.
 
+If no environment variable, then '_FILE' is appended to the environment variable name,
+and the resulting environment variable is loaded. This value is then treated as
+a file name, and the new value is read from that file. This is to support Docker Secrets,
+which are loaded as files in containers, and typically passed as these types of environment
+variables.
+
 JSON config file support for
 	{ "myint": 97 }
 You'll notice that there is no prefix inside the file since the filename counts as the

@@ -23,6 +23,12 @@ type Options struct {
 }
 
 func (o *Options) getEnv(name string) string {
+	// default to %s_FILE if env is empty/unset (docker secret)
+	if os.Getenv(o.env(name)) == "" {
+		envFile := os.Getenv(o.envFile(name))
+		val, _ := ioutil.ReadFile(envFile)
+		return string(val)
+	}
 	return os.Getenv(o.env(name))
 }
 
@@ -32,6 +38,10 @@ func (o *Options) env(name string) string {
 		strings.ToUpper(invalidEnv.ReplaceAllString(o.prefix, "_")),
 		strings.ToUpper(invalidEnv.ReplaceAllString(name, "_")),
 	)
+}
+
+func (o * Options) envFile(name string) string {
+	return fmt.Sprintf("%s_FILE",o.env(name))
 }
 
 func (o *Options) file(extension string) (string, error) {
